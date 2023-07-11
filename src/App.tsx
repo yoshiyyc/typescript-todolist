@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Space, Button } from "antd";
+import { Input, Space, Button, Checkbox } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { Todo, ActionTypes } from "./actions";
 
@@ -48,12 +48,12 @@ const App = () => {
         {todoList.map((i: Todo) => {
           return (
             <div key={i.id}>
-              <input
-                type="checkbox"
+              <Checkbox
                 onChange={() => handleCheck(i.id)}
                 checked={i.completed}
-              />
-              <label htmlFor={i.id.toString()}>{i.content}</label>
+              >
+                {i.content}
+              </Checkbox>
               <CloseOutlined onClick={() => handleDelete(i.id)} />
             </div>
           );
