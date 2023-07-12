@@ -1,0 +1,31 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 0px;
+  max-width: 350px;
+  box-sizing: border-box;
+}
+
+.addfield {
+  width: 100%;
+}
+
+.todo {
+  &__list {
+    margin: 10px 0px;
+  }
+
+  &__item,
+  &__footer {
+    padding: 3px 0px;
+  }
+
+  &__delete:hover {
+    color: red;
+  }
+
+  &__clear-all:hover {
+    cursor: pointer;
+    color: red;
+  }
+}

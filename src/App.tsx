@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Space, Button, Checkbox } from "antd";
+import { Input, Space, Button, Checkbox, Row, Col } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { Todo, ActionTypes } from "./actions";
 
@@ -32,8 +32,8 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <Space.Compact>
+    <div className="container">
+      <Space.Compact className="addfield">
         <Input
           id="todoInput"
           value={inputValue}
@@ -44,28 +44,41 @@ const App = () => {
           +
         </Button>
       </Space.Compact>
-      <div>
+      <div className="todo__list">
         {todoList.map((i: Todo) => {
           return (
-            <div key={i.id}>
-              <Checkbox
-                onChange={() => handleCheck(i.id)}
-                checked={i.completed}
-              >
-                {i.content}
-              </Checkbox>
-              <CloseOutlined onClick={() => handleDelete(i.id)} />
-            </div>
+            <Row className="todo__item" key={i.id} justify="space-between">
+              <Col>
+                <Checkbox
+                  onChange={() => handleCheck(i.id)}
+                  checked={i.completed}
+                >
+                  {i.content}
+                </Checkbox>
+              </Col>
+              <Col>
+                <CloseOutlined
+                  className="todo__delete"
+                  onClick={() => handleDelete(i.id)}
+                />
+              </Col>
+            </Row>
           );
         })}
       </div>
-      <Space>
-        <span>
-          {todoList.filter((i: Todo) => i.completed === false).length}{" "}
-          個待完成項目
-        </span>
-        <span onClick={handleDeleteAll}>清除已完成項目</span>
-      </Space>
+      <Row justify="space-between" className="todo__footer">
+        <Col>
+          <span>
+            {todoList.filter((i: Todo) => i.completed === false).length}{" "}
+            個待完成項目
+          </span>
+        </Col>
+        <Col>
+          <span className="todo__clear-all" onClick={handleDeleteAll}>
+            清除已完成項目
+          </span>
+        </Col>
+      </Row>
     </div>
   );
 };
